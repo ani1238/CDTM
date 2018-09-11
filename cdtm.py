@@ -1,70 +1,60 @@
 import numpy as np
 import cv2
 import os
-
 def Normalise(img):
     Nx,Ny=img.shape[:2]
     R=2*Nx*(Ny-1)+2*Ny*(Nx-1)+4*(Nx-1)*(Ny-1)
     img=np.array(img/R,dtype=float)
     return img
-def cdtm(img):
-    height, width = img.shape[:2]
-    cdtmarr=[]
-    for i in range(height-2):
-        for j in range(width-2):
-            if(img[i][j]>img[i+1][j+1]):
-                a=2
-            if(img[i][j]==img[i+1][j+1]):
-                a=1
-            if(img[i][j]<img[i+1][j+1]):
-                a=0
-            if(img[i][j+1]>img[i+1][j+1]):
-                b=2
-            if(img[i][j+1]==img[i+1][j+1]):
-                b=1
-            if(img[i][j+1]<img[i+1][j+1]):
-                b=0
-            if(img[i][j+2]>img[i+1][j+1]):
-                c=2
-            if(img[i][j+2]==img[i+1][j+1]):
-                c=1
-            if(img[i][j+2]<img[i+1][j+1]):
-                c=0
-            if(img[i+1][j+2]>img[i+1][j+1]):
-                d=2
-            if(img[i+1][j+2]==img[i+1][j+1]):
-                d=1
-            if(img[i+1][j+2]<img[i+1][j+1]):
-                d=0
-            if(img[i+2][j+2]>img[i+1][j+1]):
-                e=2
-            if(img[i+2][j+2]==img[i+1][j+1]):
-                e=1
-            if(img[i+2][j+2]<img[i+1][j+1]):
-                e=0
-            if(img[i+2][j+1]>img[i+1][j+1]):
-                f=2
-            if(img[i+2][j+1]==img[i+1][j+1]):
-                f=1
-            if(img[i+2][j+1]<img[i+1][j+1]):
-                f=0
-            if(img[i+2][j]>img[i+1][j+1]):
-                g=2
-            if(img[i+2][j]==img[i+1][j+1]):
-                g=1
-            if(img[i+2][j]<img[i+1][j+1]):
-                g=0
-            if(img[i+1][j]>img[i+1][j+1]):
-                h=2
-            if(img[i+1][j]==img[i+1][j+1]):
-                h=1
-            if(img[i+1][j]<img[i+1][j+1]):
-                h=0
-            cdtmarr.append([a,b,c,d,e,f,g,h])
-    cdtmarr=np.array(cdtmarr)
-    print(cdtmarr)
-    return cdtmarr
-    
+
+def compp(tocomp, mid):
+    if tocomp > mid:
+        return 2
+    if tocomp == mid:
+        return 1
+    return 0
+
+
+def cdtm(n, mat):
+    '''
+    n = 3
+    mat = np.array([[1, 3, 5, 7, 3, 4],
+                    [6, 2, 8, 9, 7, 6],
+                    [5, 7, 8, 7, 2, 1],
+                    [0, 0, 1, 3, 5, 9],
+                    [2, 2, 5, 4, 1, 6],
+                    [2, 1, 8, 9, 3, 0]])
+    '''
+    len, wid = mat.shape[:2]
+    cdtm = []
+    h = (int)(n / 2)
+    for i in range(h, wid - h):
+        for j in range(h, len - h):
+            mid = mat[i][j]
+            sti = i - h
+            stj = j - h
+            eni = i + h
+            enj = j + h
+            cdtmeach = []
+            while sti < eni and stj < enj:
+                for a in range(stj, enj + 1):
+                    cdtmeach.append(compp(mat[sti][a], mid))
+                sti = sti + 1
+                for a in range(sti, eni + 1):
+                    cdtmeach.append(compp(mat[a][enj], mid))
+                enj = enj - 1
+                for a in range(enj, stj - 1, -1):
+                    cdtmeach.append(compp(mat[eni][a], mid))
+                eni = eni - 1
+                for a in range(eni, sti - 1, -1):
+                    cdtmeach.append(compp(mat[a][stj], mid))
+                stj = stj + 1
+            cdtm.append(cdtmeach)
+            # print(cdtmeach)
+    cdtm = np.array(cdtm)
+
+    return cdtm
+
 
 
 ##def od1(img):
@@ -85,7 +75,7 @@ def cdtm(img):
 
 
 def od2(img,x,y):
-            cdtmarr=cdtm(img)
+            cdtmarr=cdtm(3,img)
             cdtm1=np.zeros([81,81])
             for j in range(cdtmarr.shape[0]):
                 nctu=0
@@ -107,7 +97,7 @@ def od2(img,x,y):
 
 
 img=np.array([[5,6,7,1,2],[3,4,1,2,9],[1,2,3,4,5],[4,5,7,9,1],[2,3,4,5,2]])
-od2(img,0,1)
+od2(img,0,0)
 path=(os.getcwd()+'\data')
 imgdir=os.listdir(path)
 print(imgdir)
