@@ -1,6 +1,7 @@
 import numpy as np
 import cv2
 import os
+from features import CDTMnormalise
 def Normalise(img):
     Nx,Ny=img.shape[:2]
     R=2*Nx*(Ny-1)+2*Ny*(Nx-1)+4*(Nx-1)*(Ny-1)
@@ -56,27 +57,8 @@ def cdtm(n, mat):
     return cdtm
 
 
-
-##def od1(img):
-##            cdtmarr=cdtm(img)
-##            cdtm1=np.zeros([81,81])
-##            for j in range(cdtmarr.shape[0]):
-##                nctu=0
-##                ndtu=0
-##                power=0
-##                for i in range(1,8,2):
-##                    nctu=nctu+cdtmarr[j][i]*pow(3,power)
-##                    ndtu=ndtu+cdtmarr[j][i-1]*pow(3,power)
-##                    power=power+1
-##                cdtm1[nctu][ndtu]=cdtm1[nctu][ndtu]+1
-##
-##
-##            return cdtm1
-
-
-def od2(img,x,y):
+def od2(cdtm1,img,x,y):
             cdtmarr=cdtm(3,img)
-            cdtm1=np.zeros([81,81])
             for j in range(cdtmarr.shape[0]):
                 nctu=0
                 ndtu=0
@@ -94,23 +76,24 @@ def od2(img,x,y):
 
             return cdtm1
 
-
-
+cdtm1=np.zeros([81,81])
 img=np.array([[5,6,7,1,2],[3,4,1,2,9],[1,2,3,4,5],[4,5,7,9,1],[2,3,4,5,2]])
-od2(img,0,0)
+cdtm1=od2(cdtm1,img,0,0)
+cdtm1=CDTMnormalise(cdtm1)
+print(cdtm1)
 path=(os.getcwd()+'\data')
 imgdir=os.listdir(path)
 print(imgdir)
-for i in imgdir:
-    data=os.listdir(path+'\\'+i)
-    for j in data:
-        img=cv2.imread((path+'\\'+i+'\\'+j),0)
-        img=np.array(img)
-##        print(od1(img))
-        break
-    #print(data)
-    break
-            
+##    for i in imgdir:
+##        data=os.listdir(path+'\\'+i)
+##        for j in data:
+##            img=cv2.imread((path+'\\'+i+'\\'+j),0)
+##            img=np.array(img)
+##    ##        print(od1(img))
+##            break
+##        #print(data)
+##        break
+                
 
 
 
