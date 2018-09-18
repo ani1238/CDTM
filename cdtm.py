@@ -1,7 +1,7 @@
 import numpy as np
 import cv2
 import os
-from features import CDTMnormalise
+from features import *
 def Normalise(img):
     Nx,Ny=img.shape[:2]
     R=2*Nx*(Ny-1)+2*Ny*(Nx-1)+4*(Nx-1)*(Ny-1)
