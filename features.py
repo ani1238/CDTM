@@ -58,7 +58,7 @@ def IDM(cdtm1):
     IDM=0
     for i in range(81):
         for j in range(81):
-            IDM=IDM+(1/(1+(i-j)**2)))*cdtm1[i][j]
+            IDM=IDM+(1/(1+(i-j)**2))*cdtm1[i][j]
     return IDM
 
 
