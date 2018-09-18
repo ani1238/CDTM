@@ -1,10 +1,4 @@
-#!/usr/bin/env python3
-# -*- coding: utf-8 -*-
-"""
-Created on Tue Sep 11 22:43:15 2018
 
-@author: rohit
-"""
 import numpy as np
 
 def angular_second_moment(cdtm1):
