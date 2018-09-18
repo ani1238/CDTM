@@ -58,11 +58,37 @@ def IDM(cdtm1):
     IDM=0
     for i in range(81):
         for j in range(81):
-            IDM=IDM+(1/(1+(i-j)**2)))*cdtm1[i][j]
+            IDM=IDM+(1/(1+(i-j)**2))*cdtm1[i][j]
     return IDM
 
 
+def angular_second_moment(cdtm1):
+    result=0
+    (rows,columns)=np.shape(cdtm1)
+    for i in range (rows) :
+        for j in range (columns):
+            result=result+cdtm1[i][j]**2
+    return result
+def varianceX(cdtm1):
+    result=0
+    (rows,columns)=np.shape(cdtm1)
+    for i in range (rows):
+        result=result+((i-meanX)**2)*rowSum[i]
 
+def summatrix(cdtm1):
+    pxpy = np.zeros((160), dtype=int)
+    for i in range(0, 81):
+        for j in range(0, 81):
+            pxpy[i + j] = pxpy[i + j] + cdtm1[i][j]
+    return pxpy
+
+
+def diffmatrix(cdtm1):
+    pxmy = np.zeros((80), dtype=int)
+    for i in range(0, 81):
+        for j in range(0, 81):
+            pxmy[abs(i - j)] = pxmy[abs(i - j)] + cdtm1[i][j]
+    return pxmy
 
 
 
