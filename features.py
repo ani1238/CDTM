@@ -1,3 +1,4 @@
+import numpy as np
 def CDTMnormalise(cdtm1):
     Sum=np.sum(cdtm1)
     cdtm1=np.array(cdtm1/Sum)
@@ -91,8 +92,29 @@ def diffmatrix(cdtm1):
     return pxmy
 
 
+def entropy(cdtm1):
+    l, w = cdtm1.shape()
+    ans = 0
+    for i in l:
+        for j in w:
+            ans = ans + (cdtm1[i][j] * (math.log2(cdtm1[i][j])))
+    return ans
 
 
+def sumentropy(cdtm1):
+    pxpy=summatrix(cdtm1)
+    ans = 0
+    for i in range(0, 161):
+        ans = ans + (pxpy[i] * (log2(pxpy[i])))
+    return -1 * ans
+
+
+def differenceentropy(cdtm1):
+    pxmy=diffmatrix(cdtm1)
+    ans = 0
+    for i in range(0, 81):
+        ans = ans + (pxmy[i] * (log2(pxmy[i])))
+    return -1 * ans
 
 
 
