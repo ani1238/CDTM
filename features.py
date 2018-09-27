@@ -116,7 +116,26 @@ def differenceentropy(cdtm1):
         ans = ans + (pxmy[i] * (log2(pxmy[i])))
     return -1 * ans
 
+def sumAverage(cdtm1):
+    pxpy=summatrix(cdtm1)
+    ans=0
+    for in range(0,161):
+        ans=ans+i*pxpy[i]
+    return ans
 
+def contrast(cdtm1):
+    ans=0
+    for i in range(0,81):
+        for j in range(0,81):
+            ans=ans+(i-j)**2+cdtm1[i][j]
+    return ans
+
+def energy(cdtm1):
+    ans=0;
+    for i in range(0,81):
+        for j in range(0,81):
+            ans=ans+cdtm1[i][j]**2
+    return ans
 
 
 

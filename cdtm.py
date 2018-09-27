@@ -84,15 +84,15 @@ print(cdtm1)
 path=(os.getcwd()+'\data')
 imgdir=os.listdir(path)
 print(imgdir)
-##    for i in imgdir:
-##        data=os.listdir(path+'\\'+i)
-##        for j in data:
-##            img=cv2.imread((path+'\\'+i+'\\'+j),0)
-##            img=np.array(img)
-##    ##        print(od1(img))
-##            break
-##        #print(data)
-##        break
+    for i in imgdir:
+        data=os.listdir(path+'\\'+i)
+        for j in data:
+            img=cv2.imread((path+'\\'+i+'\\'+j),0)
+            img=np.array(img)
+            print(od1(img))
+            break
+        print(data)
+        break
                 
 
 
