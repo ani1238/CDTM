@@ -14,6 +14,7 @@ def columnSum(cdtm1):
     return columnSum
 
 def meanX(cdtm1):
+    rowSum=0
     rowSum=rowSum(cdtm1)
     meanX=0
     for i in range(0,81):
@@ -22,38 +23,38 @@ def meanX(cdtm1):
 
 
 def meanY(cdtm1):
-    columnSum=columnSum(cdtm1)
+    columnsum=columnSum(cdtm1)
     meanY=0
     for i in range(0,81):
-        meanY=meanY+i*columnSum[i]
+        meanY=meanY+i*columnsum[i]
     return meanY
 
 def STdevX(cdtm1):
-    rowSum=rowSum(cdtm1)
-    meanX=meanX(cdtm1)
+    rowsum=rowSum(cdtm1)
+    meanx=meanX(cdtm1)
     stdX=0
     for i in range(81):
-        stdX=stdX+((i-meanX)**2)*rowSum
-    return sqrt(stdX)
+        stdX=stdX+((i-meanx)**2)*rowsum
+    return math.sqrt(stdX)
 
 def STdevY(cdtm1):
-    columnSum=columnSum(cdtm1)
-    meanY=meanY(cdtm1)
+    columnsum=columnSum(cdtm1)
+    meany=meanY(cdtm1)
     stdY=0
     for i in range(81):
-        stdY=stdY+((i-meanY)**2)*columnSum
-    return sqrt(stdY)
+        stdY=stdY+((i-meany)**2)*columnsum
+    return math.sqrt(stdY)   
 
 def correlation(cdtm1):
-    meanX=meanX(cdtm1)
-    meanY=meanY(cdtm1)
+    meanx=meanX(cdtm1)
+    meany=meanY(cdtm1)
     stdX=STdevX(cdtm1)
     stdY=STdevY(cdtm1)
 
     correlation=0
     for i in range(81):
         for j in range(81):
-            correlation=correlation+((i*j)*cdtm1[i][j]-meanX*meanY)/(stdX*stdY)
+            correlation=correlation+((i*j)*cdtm1[i][j]-meanx*meany)/(stdX*stdY)
     return correlation
 
 def IDM(cdtm1):
