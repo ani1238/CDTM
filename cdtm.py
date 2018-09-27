@@ -51,7 +51,7 @@ def cdtm(n, mat):
                     cdtmeach.append(compp(mat[a][stj], mid))
                 stj = stj + 1
             cdtm.append(cdtmeach)
-            # print(cdtmeach)
+            #print(cdtmeach)
     cdtm = np.array(cdtm)
 
     return cdtm
@@ -81,7 +81,7 @@ img=np.array([[5,6,7,1,2],[3,4,1,2,9],[1,2,3,4,5],[4,5,7,9,1],[2,3,4,5,2]])
 cdtm1=od2(cdtm1,img,0,0)
 cdtm1=CDTMnormalise(cdtm1)
 print(cdtm1)
-path=(os.getcwd()+'\data')
+path=(os.getcwd()+'/data')
 imgdir=os.listdir(path)
 print(imgdir)
 ##    for i in imgdir:
