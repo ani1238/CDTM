@@ -19,7 +19,6 @@ def compp(tocomp, mid):
 
 
 def cdtm(n, mat):
-    print('cdtmeach')
     '''
     n = 3
     mat = np.array([[1, 3, 5, 7, 3, 4],
@@ -84,33 +83,31 @@ img=np.array([[5,6,7,1,2],[3,4,1,2,9],[1,2,3,4,5],[4,5,7,9,1],[2,3,4,5,2]])
 #cdtm1=od2(cdtm1,img,1,0)
 #cdtm1=CDTMnormalise(cdtm1)
 #print(cdtm1)
-path=(os.getcwd()+'\data')
+path=(os.getcwd()+'/data')
 imgdir=os.listdir(path)
 print(imgdir)
 for i in imgdir:
-        data=os.listdir(path+'\\MIAS')
+        data=os.listdir(path+'/'+i)
         for j in data:
             c=0
             df=pd.DataFrame(columns=['index','asm','correlation','variance','idm','entropy','sum_entropy','difference_entropy','sum_avg','contrast','energy','type'])
-            for ii in os.listdir(path+'\\'+i+'\\'+j):
+            for ii in os.listdir(path+'/'+i+'/'+j):
                 print(ii)
-                img=cv2.imread((path+'\\'+i+'\\'+j+'\\'+ii),0)
+                img=cv2.imread((path+'/'+i+'/'+j+'/'+ii),0)
                 img=np.array(img)
                 #print(img)
                 cdtm1=np.zeros((81,81))
-                print('hell')
                 cdtm2=cdtm(3,img)
                 for k in range (0,4):
                     for l in range(0,4):
                         cdtm1=od2(cdtm2,cdtm1,k,l)
                 cdtm2=CDTMnormalise(cdtm1)
                 df.loc[c]=[c,angular_second_moment(cdtm2),correlation(cdtm2),varianceX(cdtm2),IDM(cdtm2),entropy(cdtm2),sumentropy(cdtm2),differenceentropy(cdtm2),sumAverage(cdtm2),contrast(cdtm2),energy(cdtm2),j]
-                
                 c=c+1
             df.to_csv(str(j)+'.csv',sep=',')
             #break
         #print(data)
-        break
+        #break
                 
 
 

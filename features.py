@@ -52,7 +52,6 @@ def correlation(cdtm1):
     stdX=STdevX(cdtm1)
     stdY=STdevY(cdtm1)
     correlation=0
-    print(meanx,meany,stdX,stdY)
     for i in range(81):
         for j in range(81):
             correlation=correlation+((i*j)*cdtm1[i][j]-meanx*meany)/(stdX*stdY)
@@ -80,6 +79,7 @@ def varianceX(cdtm1):
     (rows,columns)=np.shape(cdtm1)
     for i in range (rows):
         result=result+((i-meanx)**2)*rowsum[i]
+    return result
 
 def summatrix(cdtm1):
     pxpy = np.zeros((161), dtype=float)
