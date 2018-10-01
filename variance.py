@@ -7,8 +7,6 @@ Created on Tue Sep 11 22:56:42 2018
 """
 import numpy as np
 
-def varianceX(cdtm1):
-    result=0
-    (rows,columns)=np.shape(cdtm1)
-    for i in range (rows):
-        result=result+((i-meanX)**2)*rowSum[i]
+import pandas as pd
+df=pd.read_csv('mias.csv')
+df.to_csv('mias.csv')
