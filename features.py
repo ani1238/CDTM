@@ -106,7 +106,8 @@ def entropy(cdtm1):
             if(cdtm1[i][j]!=0):
                 ans = ans + (cdtm1[i][j] * math.log(cdtm1[i][j],2.0))
             
-    return ans
+    #return ans
+    return (-1)*ans
 
 
 def sumentropy(cdtm1):
@@ -139,7 +140,8 @@ def contrast(cdtm1):
     ans=0.0
     for i in range(0,81):
         for j in range(0,81):
-            ans=(float)(ans+(float)((i-j)**2)+cdtm1[i][j])
+            #ans=(float)(ans+(float)((i-j)**2)+cdtm1[i][j])
+            ans=(float)(ans+(float)((i-j)**2)*cdtm1[i][j])
            # print(ans)
     return ans
 
@@ -150,6 +152,13 @@ def energy(cdtm1):
             ans=ans+cdtm1[i][j]**2
     return ans
 
+def clusterShade(cdtm1):
+    ans=0.0
+    for i in range(0,81):
+        for j in range(0,81):
+            ans=ans+((i+j-meanX(cdtm1)-meanY(cdtm1))**3)*cdtm1[i][j]
+            
+    return ans
 
 
 
