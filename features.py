@@ -2,7 +2,8 @@ import numpy as np
 import math
 def CDTMnormalise(cdtm1):
     Sum=np.sum(cdtm1)
-    cdtm1=np.array(cdtm1/Sum)
+    if Sum!=0:
+        cdtm1=np.array(cdtm1/Sum)
     return cdtm1
 
 def rowSum(cdtm1):
